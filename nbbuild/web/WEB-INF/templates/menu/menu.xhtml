@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">	
+            <p:menubar autoDisplay="false">
+
+                <p:menuitem value="Inicio" url="/index.xhtml" />
+
+                <p:submenu label="Cadastros" icon="ui-icon-document">
+                    <p:menuitem value="Pessoa" action="#{pessoaBean.iniciar()}"/>
+                    <p:menuitem value="Filmes" action="#{filmeBean.iniciar()}"/>
+                </p:submenu>
+            </p:menubar>
+        </h:form>	
+    </ui:composition>
+</html>

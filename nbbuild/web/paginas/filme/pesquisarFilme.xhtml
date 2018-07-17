@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="corpo">
+        <p:panel style="width:100%; margin-bottom:20px; text-align:center">
+            <h:form id="filmeForm">					
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Nome: " />
+
+                    <p:inputText 
+                        id="nomeFilme"
+                        maxlength="45"
+                        value="#{filmeBean.nomeFilmePesquisa}"
+                        style="width: 300px" />
+
+                    <p:commandButton
+                        id="pesquisarFilme"
+                        value="Pesquisar"
+                        icon="ui-icon-search"
+                        action="#{filmeBean.pesquisar()}"
+                        update=":filmeForm" />
+
+                    <p:commandButton
+                        id="incluirFilme"
+                        value="Incluir"
+                        immediate="true"
+                        icon="ui-icon-document"
+                        action="#{filmeBean.incluir()}"  />
+                </h:panelGrid>
+
+                <br />
+
+                <p:dataTable 
+                    id="listaFilmes"
+                    var="filme"
+                    value="#{filmeBean.filmes}"
+                    emptyMessage="Nenhum registro encontrado.">
+
+                    <f:facet name="header">
+                        <h:outputText value="Lista de Filmes" />
+                    </f:facet>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome" />
+                        </f:facet>
+                        <h:outputText value="#{filme.nome}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Genero" />
+                        </f:facet>
+                        <h:outputText value="#{filme.genero}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Faixa Etaria" />
+                        </f:facet>
+                        <h:outputText value="#{filme.faixaEtaria}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data de Lancamento" />
+                        </f:facet>
+                        <h:outputText value="#{filme.dataLancamento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações" />
+                        </f:facet>
+
+                        <p:commandLink  
+                            id="alterarFilme"
+                            update="@form"
+                            action="#{filmeBean.alterar(filme)}"
+                            title="Alterar">
+                            <h:graphicImage library="imagens" name="icons/edit.png" />
+                        </p:commandLink>
+
+                        <p:commandLink 
+                            id="excluirFilme"
+                            update="@form"
+                            action="#{filmeBean.excluir(filme)}"
+                            title="Excluir">
+                            <h:graphicImage library="imagens" name="icons/trash.png" />
+                            <p:confirm header="Confirmação" message="Deseja realmente Excluir?" icon="ui-icon-alert" />
+                        </p:commandLink>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

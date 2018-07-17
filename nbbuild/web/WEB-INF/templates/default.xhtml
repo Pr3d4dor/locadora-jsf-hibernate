@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>
+			<ui:insert name="titulo">
+				Pós Desenvolvimento WEB
+			</ui:insert>
+		</title>
+		
+		<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/css/hibernate.css?ln=css" />		
+		
+		<h:outputScript name="locale-primefaces.js" library="js" />
+		
+		<style type="text/css">
+			#topo {
+				text-align: center;
+			} 
+	    </style> 
+	</h:head>
+	
+	<h:body>
+		<div id="divGeralTemplate">
+			<div id="divCentroTemplate">
+				<div id="topo">
+					<ui:insert name="topo">
+			    		<ui:include src="/WEB-INF/templates/topo/topo.xhtml"/>
+			    	</ui:insert>
+				</div>
+				
+				<br/>
+				
+				<div id="menu">
+		    		<ui:insert name="menu">
+			    		<ui:include src="/WEB-INF/templates/menu/menu.xhtml"/>
+			    	</ui:insert>
+		    	</div>
+		    	
+		    	<br/>
+		    	
+		    	<div id="corpo">
+		    		<h:form id="alertaMensagens">
+						<p:messages 
+							id="mensagensInfo" 
+							showDetail="true"
+							autoUpdate="true"
+							severity="info"
+							closable="true" />
+							
+						<p:messages 
+							id="mensagensError" 
+							showDetail="false"
+							autoUpdate="true"
+							severity="error"
+							closable="true" />				    		
+
+		    		</h:form>  
+		    		<ui:insert name="corpo"/>
+		    	</div>
+		    	
+		    	<br/>
+		    	
+		    	<div id="rodape">
+		    		<ui:insert name="rodape">
+			    		<ui:include src="/WEB-INF/templates/rodape/rodape.xhtml"/>
+			    	</ui:insert>
+		    	</div>
+			</div>
+		</div>
+	</h:body>
+</html>

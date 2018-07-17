@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="corpo">
+        <p:panel style="width:100%; margin-bottom:20px">
+            <h:form id="filmeForm">					
+
+                <h:panelGrid id="infoFilme" columns="2" border="1">						
+
+                    <p:outputLabel value="Nome: " />
+
+                    <p:inputText 
+                        id="nomeFilme"
+                        label="Nome"
+                        maxlength="45"
+                        value="#{filmeBean.filme.nome}"
+                        required="true"
+                        requiredMessage="Nome: campo é obrigatório."
+                        style="width: 300px" />
+
+                    <p:outputLabel value="Genero: " />
+
+                    <p:inputText 
+                        id="generoFilme"
+                        label="Nome"
+                        maxlength="45"
+                        value="#{filmeBean.filme.genero}"
+                        required="true"
+                        requiredMessage="Nome: genero é obrigatório."
+                        style="width: 300px" />
+                    
+                    <p:outputLabel value="Faixa etaria: " />
+
+                    <p:inputText 
+                        id="faixaEtariaFilme"
+                        label="Nome"
+                        maxlength="45"
+                        value="#{filmeBean.filme.faixaEtaria}"
+                        required="true"
+                        requiredMessage="Faixa etaria: campo é obrigatório."
+                        style="width: 300px" />
+
+                    <p:outputLabel value="Data de Lancamento " />
+
+                    <p:calendar
+                        id="dataLancamentoFilme"
+                        value="#{filmeBean.filme.dataLancamento}"
+                        locale="pt_BR"
+                        showOn="button"
+                        mask="true"
+                        required="true"
+                        requiredMessage="Data de Lancamento: campo é obrigatório."
+                        navigator="true"
+                        pattern="dd/MM/yyyy" />
+							
+                </h:panelGrid>
+
+                <h:panelGrid id="acoes" columns="2">
+                    <p:commandButton
+                        id="salvarFilme"
+                        value="Salvar"
+                        update="@form"
+                        icon="ui-icon-disk"
+                        action="#{filmeBean.salvar()}"
+                        style="float:left" />
+
+                    <p:commandButton 
+                        id="cancelarFilme"
+                        value="Cancelar"
+                        immediate="true"
+                        icon="ui-icon-close"
+                        action="#{filmeBean.cancelar()}"									
+                        style="float:left" />
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="corpo">
+        <p:panel style="width:100%; margin-bottom:20px">
+            <h:form id="pessoaForm">					
+
+                <h:panelGrid id="infoPessoa" columns="2" border="1">						
+
+                    <p:outputLabel value="Nome: " />
+
+                    <p:inputText 
+                        id="nomePessoa"
+                        label="Nome"
+                        maxlength="45"
+                        value="#{pessoaBean.pessoa.nome}"
+                        required="true"
+                        requiredMessage="Nome: campo é obrigatório."
+                        style="width: 300px" />
+
+                    <p:outputLabel value="CPF: " />
+
+                    <p:inputMask
+                        id="cpfPessoa"
+                        label="CPF"
+                        maxlength="14"
+                        mask="999.999.999-99"
+                        value="#{pessoaBean.pessoa.cpf}"
+                        required="true"
+                        requiredMessage="CPF: campo é obrigatório."
+                        style="width: 150px" />
+
+                    <p:outputLabel value="Data de Nascimento: " />
+
+                    <p:calendar
+                        id="dataNascimentoPessoa"
+                        value="#{pessoaBean.pessoa.dataNascimento}"
+                        locale="pt_BR"
+                        showOn="button"
+                        mask="true"
+                        required="true"
+                        requiredMessage="Data de Nascimento: campo é obrigatório."
+                        navigator="true"
+                        pattern="dd/MM/yyyy" />
+
+                </h:panelGrid>
+
+                <h:panelGrid id="acoes" columns="2">
+                    <p:commandButton
+                        id="salvarPessoa"
+                        value="Salvar"
+                        update="@form"
+                        icon="ui-icon-disk"
+                        action="#{pessoaBean.salvar()}"
+                        style="float:left" />
+
+                    <p:commandButton 
+                        id="cancelarPessoa"
+                        value="Cancelar"
+                        immediate="true"
+                        icon="ui-icon-close"
+                        action="#{pessoaBean.cancelar()}"									
+                        style="float:left" />
+                </h:panelGrid>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>
