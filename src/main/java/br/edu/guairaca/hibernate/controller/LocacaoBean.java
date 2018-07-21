@@ -80,6 +80,9 @@ public class LocacaoBean extends AbstractController implements Serializable {
 
     public String alterar(Locacao locacao) {
         this.locacao = locacaoDAO.find(locacao.getId());
+        this.listaFilmes = filmeDAO.findAll();
+        this.listaPessoas = pessoaDAO.findAll();
+        
         return "/paginas/locacao/manterLocacao.xhtml?faces-redirect=true";
     }
 
@@ -99,6 +102,8 @@ public class LocacaoBean extends AbstractController implements Serializable {
                 mensagemInformacao("", "Locacao salvo com sucesso.");
                 this.locacao = new Locacao();
             } else {
+                this.locacao.getFilmes().clear();
+                
                 this.locacaoDAO.merge(this.locacao);
                 mensagemInformacao("", "Locacao alterada com sucesso.");
             }

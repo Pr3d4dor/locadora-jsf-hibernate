@@ -28,7 +28,7 @@ public class Locacao implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pessoa", nullable = false)
     private Pessoa pessoa;
 
