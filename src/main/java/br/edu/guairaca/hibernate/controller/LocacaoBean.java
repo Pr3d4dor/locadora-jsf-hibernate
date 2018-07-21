@@ -97,13 +97,14 @@ public class LocacaoBean extends AbstractController implements Serializable {
 
     public void salvar() {
         try {
+            this.locacao.getFilmes().clear();
+            this.locacao.setFilmes(filmes);
+            
             if (this.locacao.getId() == null) {
                 this.locacaoDAO.persist(this.locacao);
                 mensagemInformacao("", "Locacao salvo com sucesso.");
                 this.locacao = new Locacao();
             } else {
-                this.locacao.getFilmes().clear();
-                
                 this.locacaoDAO.merge(this.locacao);
                 mensagemInformacao("", "Locacao alterada com sucesso.");
             }

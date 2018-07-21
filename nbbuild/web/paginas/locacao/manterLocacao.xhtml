@@ -35,7 +35,7 @@
                         requiredMessage="Filmes: campo é obrigatório."
                         label="Filmes"	 					
                         converter="#{filmeConverter}"
-                        value="#{locacaoBean.locacao.filmes}">
+                        value="#{locacaoBean.filmes}">
                         <f:selectItems value="#{locacaoBean.listaFilmes}" var="f" itemLabel="#{f.nome}" itemValue="#{f}" />
                     </p:selectManyMenu>
 
