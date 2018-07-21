@@ -2,14 +2,16 @@ package br.edu.guairaca.hibernate.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +36,9 @@ public class Filme implements Serializable {
 
     @Column(name = "dt_lancamento", nullable = false)
     private Date dataLancamento;
+
+    @ManyToMany(mappedBy = "filmes", fetch = FetchType.EAGER)
+    private Set<Locacao> locacoes = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -71,13 +76,22 @@ public class Filme implements Serializable {
         this.dataLancamento = dataLancamento;
     }
 
+    public Set<Locacao> getLocacoes() {
+        return locacoes;
+    }
+
+    public void setLocacoes(Set<Locacao> locacoes) {
+        this.locacoes = locacoes;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Objects.hashCode(this.genero);
-        hash = 29 * hash + Objects.hashCode(this.faixaEtaria);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Objects.hashCode(this.genero);
+        hash = 37 * hash + Objects.hashCode(this.faixaEtaria);
+        hash = 37 * hash + Objects.hashCode(this.dataLancamento);
         return hash;
     }
 
@@ -105,6 +119,14 @@ public class Filme implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.dataLancamento, other.dataLancamento)) {
+            return false;
+        }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 }

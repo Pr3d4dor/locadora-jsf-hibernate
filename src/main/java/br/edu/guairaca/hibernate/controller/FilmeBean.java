@@ -24,23 +24,23 @@ public class FilmeBean extends AbstractController implements Serializable {
     private Filme filme;
 
     private String nomeFilmePesquisa;
-    
+
     private String nome;
     private String genero;
     private String faixaEtaria;
     private Date dataLancamento;
 
     private List<Filme> filmes;
-    
+
     @PostConstruct
-    private void init() {
+    public void init() {
         todos();
     }
 
     public void todos() {
         this.filmes = dao.findAll();
     }
-    
+
     public void pesquisar() {
         this.filmes = dao.buscarPorNome(nomeFilmePesquisa);
     }

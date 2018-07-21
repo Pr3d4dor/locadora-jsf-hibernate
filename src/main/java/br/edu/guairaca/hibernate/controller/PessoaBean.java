@@ -24,22 +24,22 @@ public class PessoaBean extends AbstractController implements Serializable {
     private Pessoa pessoa;
 
     private String nomePessoaPesquisa;
-    
+
     private String nome;
     private String cpf;
     private Date dataNascimento;
 
     private List<Pessoa> pessoas;
-    
+
     @PostConstruct
-    private void init() {
+    public void init() {
         todos();
     }
 
     public void todos() {
         this.pessoas = dao.findAll();
     }
-    
+
     public void pesquisar() {
         this.pessoas = dao.buscarPorNome(nomePessoaPesquisa);
     }

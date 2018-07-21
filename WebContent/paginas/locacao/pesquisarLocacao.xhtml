@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:define name="corpo">
+        <p:panel style="width:100%; margin-bottom:20px; text-align:center">
+            <h:form id="locacaoForm">					
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Pessoa: " />
+
+                    <p:inputText 
+                        id="nomePessoa"
+                        maxlength="45"
+                        value="#{locacaoBean.nomeLocacaoPesquisa}"
+                        style="width: 300px" />
+
+                    <p:commandButton
+                        id="pesquisarLocacao"
+                        value="Pesquisar"
+                        icon="ui-icon-search"
+                        action="#{locacaoBean.pesquisar()}"
+                        update=":locacaoForm" />
+
+                    <p:commandButton
+                        id="incluirLocacao"
+                        value="Incluir"
+                        immediate="true"
+                        icon="ui-icon-document"
+                        action="#{locacaoBean.incluir()}"  />
+                </h:panelGrid>
+
+                <br />
+
+                <p:dataTable 
+                    id="listaLocacaos"
+                    var="locacao"
+                    value="#{locacaoBean.locacoes}"
+                    emptyMessage="Nenhum registro encontrado.">
+
+                    <f:facet name="header">
+                        <h:outputText value="Lista de Locacaos" />
+                    </f:facet>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome" />
+                        </f:facet>
+                        <h:outputText value="#{locacao.pessoa.nome}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Filmes" />
+                        </f:facet>
+                        <h:outputText value="#{locacao.filmes}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data de Locacao" />
+                        </f:facet>
+                        <h:outputText value="#{locacao.dataLocacao}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações" />
+                        </f:facet>
+
+                        <p:commandLink  
+                            id="alterarLocacao"
+                            update="@form"
+                            action="#{locacaoBean.alterar(locacao)}"
+                            title="Alterar">
+                            <h:graphicImage library="imagens" name="icons/edit.png" />
+                        </p:commandLink>
+
+                        <p:commandLink 
+                            id="excluirLocacao"
+                            update="@form"
+                            action="#{locacaoBean.excluir(locacao)}"
+                            title="Excluir">
+                            <h:graphicImage library="imagens" name="icons/trash.png" />
+                            <p:confirm header="Confirmação" message="Deseja realmente Excluir?" icon="ui-icon-alert" />
+                        </p:commandLink>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:confirmDialog>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:panel>
+    </ui:define>
+</ui:composition>

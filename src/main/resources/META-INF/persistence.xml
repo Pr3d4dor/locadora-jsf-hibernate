@@ -10,6 +10,7 @@
         <!-- entidade mapeada -->
         <class>br.edu.guairaca.hibernate.model.Filme</class>
         <class>br.edu.guairaca.hibernate.model.Pessoa</class>
+        <class>br.edu.guairaca.hibernate.model.Locacao</class>
 
         <properties>
             <!-- dados da conexao -->

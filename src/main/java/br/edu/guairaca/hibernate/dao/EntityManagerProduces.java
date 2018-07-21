@@ -1,6 +1,6 @@
 package br.edu.guairaca.hibernate.dao;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
@@ -12,7 +12,7 @@ public class EntityManagerProduces {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("hibernate");
 
     @Produces
-    @RequestScoped
+    @SessionScoped
     public EntityManager criaEntityManager() {
         return factory.createEntityManager();
     }
